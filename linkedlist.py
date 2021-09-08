@@ -115,3 +115,13 @@ class LinkedList:
                 itr.next = itr.next.next
                 break
             itr = itr.next
+    def reverse_list(self):
+        dummy=None
+        itr=self.head
+        while itr:
+            next_node=itr.next
+            itr.next=dummy
+            dummy=itr
+            itr=next_node
+        self.head=dummy
+        self.print()
