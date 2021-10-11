@@ -130,7 +130,7 @@ class LinkedList:
             print("Linked list is Empty")
             return
         itr=self.head
-        while itr.next is not None:
+        while itr is not None:
             if itr.data==data:
                 print("Found element "+str(data)+" at "+str(index+1)+" position")
                 return
@@ -158,3 +158,18 @@ class LinkedList:
             itr=itr.next
             i+=1
         print(f"{index} node from the last is "+str(itr.data))
+
+    def palindrome(self):
+        if self.head==None:
+            return
+        string=""
+        itr=self.head
+        while itr is not None:
+            string+=str(itr.data)
+            itr=itr.next
+        print(string)
+        print(string[::-1])
+        if string==string[::-1]:
+            print("Linked List is a palindrome")
+        else:
+            print("Linked List is not a palindrome")
