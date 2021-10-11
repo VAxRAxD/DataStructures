@@ -80,9 +80,9 @@ class LinkedList:
             itr = itr.next
             count+=1
 
-    def insert_values(self, data_list):
+    def insert_values(self, *args):
         self.head = None
-        for data in data_list:
+        for data in args:
             self.insert_at_end(data)
 
     def insert_after_value(self, data_after, data_to_insert):
@@ -115,6 +115,28 @@ class LinkedList:
                 itr.next = itr.next.next
                 break
             itr = itr.next
+    
+    def remove_last(self):
+        if self.head is None:
+            return
+        itr=self.head
+        while itr.next.next:
+            itr=itr.next
+        itr.next=None
+
+    def search(self,data):
+        index=0
+        if self.head is None:
+            print("Linked list is Empty")
+            return
+        itr=self.head
+        while itr.next is not None:
+            if itr.data==data:
+                print("Found element "+str(data)+" at "+str(index+1)+" position")
+                return
+            index+=1
+            itr=itr.next
+
     def reverse_list(self):
         dummy=None
         itr=self.head
@@ -125,3 +147,14 @@ class LinkedList:
             itr=next_node
         self.head=dummy
         self.print()
+
+    def n_node_from_last(self,index):
+        if index==0:
+            return
+        n=self.get_length()-index
+        itr=self.head
+        i=0
+        while i<n:
+            itr=itr.next
+            i+=1
+        print(f"{index} node from the last is "+str(itr.data))
