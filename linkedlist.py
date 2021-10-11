@@ -125,4 +125,3 @@ class LinkedList:
             itr=next_node
         self.head=dummy
         self.print()
-
