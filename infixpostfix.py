@@ -14,7 +14,7 @@ class Stack(object):
 	def isEmpty(self):
 		return len(self.container)==0
 
-infix="a+b*(c^d-e)^(f+g*h)-i"
+infix="a+b/c*d-e"
 postfix=""
 precedence = {'+':1, '-':1, '*':2, '/':2, '^':3,'(':0}
 operators=['+','-','/','*','%']
