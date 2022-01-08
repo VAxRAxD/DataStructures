@@ -78,7 +78,8 @@ class BinarySearchTree:
 
 	def delete(self,data):
 		if self.search(data)=="Element not found":
-			return "Element not found"
+			print("Element not found")
+			return 
 		if data<self.data:
 			self.left=self.left.delete(data)
 		elif data>self.data:
@@ -90,9 +91,8 @@ class BinarySearchTree:
 				return self.right
 			if self.right is None:
 				return self.left
-			min_val=self.right.minimum()
-			self.data=min_val
-			self.right=self.right.delete(min_val)
+			self.data=self.right.minimum()
+			self.right=self.right.delete(self.data)
 		return self
 
 
@@ -139,6 +139,6 @@ print(root.levelorder())
 print(root.search(9))
 print(root.maximum())
 print(root.minimum())
-print(root.child(34))
-root.delete(4)
+print(root.child(4))
+root.delete(20)
 print(root.inorder())

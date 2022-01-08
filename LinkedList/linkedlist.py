@@ -167,8 +167,6 @@ class LinkedList:
         while itr is not None:
             string+=str(itr.data)
             itr=itr.next
-        print(string)
-        print(string[::-1])
         if string==string[::-1]:
             print("Linked List is a palindrome")
         else:
