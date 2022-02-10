@@ -8,15 +8,14 @@ class Graph:
 		visited=[0]*self.nodes
 		buffer=deque()
 		bfs=[]
-		for i in range(1,self.nodes+1):
-			if visited[i-1]==0:
-				buffer.appendleft(i)
-				while len(buffer)!=0:
-					node=buffer.pop()
-					if visited[node-1]==0:
-						buffer.extendleft(self.adj[node-1])
-						bfs.append(node)
-						visited[node-1]=1
+		for i in range(self.nodes):
+			buffer.appendleft(i)
+			while len(buffer)!=0:
+				node=buffer.pop()
+				if visited[node]==0:
+					buffer.extendleft(self.adj[node])
+					bfs.append(node)
+					visited[node]=1
 		return " ".join(str(elem) for elem in bfs)
 
 
@@ -42,6 +41,28 @@ class Graph:
 			buffer.appendleft(nodes)
 			if visited[nodes]==0:
 				self.traversal(nodes,visited,self.adj,dfs,buffer)
+
+	def toposortBfs(self):
+		toposort=[]
+		indegree=[0 for _ in range(self.nodes)]
+		for node in self.adj:
+			for elem in node:
+				indegree[elem]+=1
+		buffer=deque()
+		self.indegreeCalc(buffer,indegree)
+		while len(buffer)!=0:
+			curr=buffer.pop()
+			toposort.append(curr)
+			for nodes in adj[curr]:
+				indegree[nodes]-=1
+			self.indegreeCalc(buffer,indegree)
+		return " ".join(str(elem) for elem in toposort)
+	
+	def indegreeCalc(self,buffer,indegree):
+		for i in range(self.nodes):
+			if indegree[i]==0:
+				buffer.appendleft(i)
+				indegree[i]-=1
 	
 	def toposortDfs(self):
 		return self.dfs("Toposort")
@@ -59,19 +80,19 @@ class Graph:
 		buffer=deque()
 		bfs=[]
 		cycle=False
-		for i in range(1,self.nodes+1):
-			if visited[i-1]==0:
+		for i in range(self.nodes):
+			if visited[i]==0:
 				buffer.appendleft([i,-1])
 				while len(buffer)!=0:
 					node,origin=buffer.pop()
-					visited[node-1]=1
-					for nodes in self.adj[node-1]:
-						if visited[nodes-1]==1:
+					visited[node]=1
+					for nodes in self.adj[node]:
+						if visited[nodes]==1:
 							if nodes!=origin:
 								cycle=True
 						else:
 							buffer.appendleft([nodes,node])
-							visited[nodes-1]=1
+							visited[nodes]=1
 		return cycle
 n=6
 m=[[2,3],[3,1],[4,0],[4,1],[5,0],[5,2]]
@@ -81,6 +102,7 @@ for edge in m:
 	adj[i].append(j)
 g=Graph(n,adj)
 # print(g.bfs())
-print(g.dfs())
-print(g.toposortDfs())
-# print(g.cycleBfs())
+print(g.toposortBfs())
+# print(g.dfs())
+# print(g.toposortDfs())
+print(g.cycleBfs())
