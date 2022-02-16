@@ -1,7 +1,4 @@
-count=0
-
 def partition(arr,low,high):
-    global count
     pivot=low
     pos=low
     for i in range(pos+1,high+1):
@@ -9,7 +6,6 @@ def partition(arr,low,high):
             pos+=1
             arr[i],arr[pos]=arr[pos],arr[i]
     arr[pos],arr[pivot]=arr[pivot],arr[pos]
-    count+=1
     return pos
 
 def quicksort(arr,low,high):
