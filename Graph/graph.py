@@ -9,37 +9,40 @@ class Graph:
 		buffer=deque()
 		bfs=[]
 		for i in range(self.nodes):
-			buffer.appendleft(i)
-			while len(buffer)!=0:
-				node=buffer.pop()
-				if visited[node]==0:
-					buffer.extendleft(self.adj[node])
+			if visited[i]==0:
+				buffer.appendleft(i)
+				while len(buffer)!=0:
+					node=buffer.pop()
+					for elem in self.adj[node]:
+						if visited[elem]==0:
+							buffer.appendleft(elem)
+							visited[elem]=1
 					bfs.append(node)
 					visited[node]=1
 		return " ".join(str(elem) for elem in bfs)
-
 
 	def dfs(self,func=None):
 		dfs=[]
 		visited=[0]*self.nodes
 		buffer=deque()
 		for i in range(self.nodes):
-			buffer.appendleft(i)
-			while len(buffer)!=0:
-				curr=buffer.pop()
-				if visited[curr]==0:
-					if func=="Toposort":
-						self.sorting(curr,visited,self.adj,dfs,buffer)
-					else:
-						self.traversal(curr,visited,self.adj,dfs,buffer)
+			if visited[i]==0:
+				buffer.appendleft(i)
+				while len(buffer)!=0:
+					curr=buffer.pop()
+					if visited[curr]==0:
+						if func=="Toposort":
+							self.sorting(curr,visited,self.adj,dfs,buffer)
+						else:
+							self.traversal(curr,visited,self.adj,dfs,buffer)
 		return " ".join(str(elem) for elem in dfs)
 
 	def traversal(self,node,visited,adj,dfs,buffer):
 		dfs.append(node)
 		visited[node]=1
 		for nodes in adj[node]:
-			buffer.appendleft(nodes)
 			if visited[nodes]==0:
+				buffer.appendleft(nodes)
 				self.traversal(nodes,visited,self.adj,dfs,buffer)
 
 	def toposortBfs(self):
@@ -65,7 +68,7 @@ class Graph:
 				indegree[i]-=1
 	
 	def toposortDfs(self):
-		return self.dfs("Toposort")
+		return self.dfs("Toposort")[::-1]
 	
 	def sorting(self,node,visited,adj,dfs,buffer):
 		visited[node]=1
@@ -101,8 +104,8 @@ for edge in m:
 	i,j=edge[0],edge[1]
 	adj[i].append(j)
 g=Graph(n,adj)
-# print(g.bfs())
+print(g.bfs())
 print(g.toposortBfs())
-# print(g.dfs())
-# print(g.toposortDfs())
+print(g.dfs())
+print(g.toposortDfs())
 print(g.cycleBfs())
