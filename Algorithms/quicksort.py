@@ -9,12 +9,11 @@ def partition(arr,low,high):
     return pos
 
 def quicksort(arr,low,high):
-    if len(arr)==1:
-        return arr
     if low<high:
         pivot=partition(arr,low,high)
         quicksort(arr,low,pivot-1)
         quicksort(arr,pivot+1,high)
 
 arr=[10,7,8,19,1,5]
-quicksort(arr,0,5)
+quicksort(arr,0,len(arr)-1)
+print(arr)
