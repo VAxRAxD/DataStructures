@@ -81,7 +81,6 @@ class Graph:
 	def cycleBfs(self):
 		visited=[0]*self.nodes
 		buffer=deque()
-		bfs=[]
 		cycle=False
 		for i in range(self.nodes):
 			if visited[i]==0:
@@ -101,7 +100,7 @@ n=6
 m=[[2,3],[3,1],[4,0],[4,1],[5,0],[5,2]]
 adj=[[] for _ in range(n)]
 for edge in m:
-	i,j=edge[0],edge[1]
+	i,j=map(int,edge)
 	adj[i].append(j)
 g=Graph(n,adj)
 print(g.bfs())
