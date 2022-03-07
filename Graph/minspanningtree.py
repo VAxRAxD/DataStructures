@@ -4,7 +4,7 @@ def distances(n,cost,visited):
     minimum=float('inf')
     for node in visited:
         for i in range(n):
-            if i+1 not in visited:
+            if i+1 not in visited and cost[node-1][i]!=None:
                 if cost[node-1][i]<minimum:
                     edge=[node,i+1]
                     minimum=cost[node-1][i]
