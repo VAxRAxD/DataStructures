@@ -1,6 +1,16 @@
-cost=[[None,10,3,None,None],[None,None,1,2,None],[None,4,None,8,2],[None,None,None,None,7],[None,None,None,None,9]]
+edges=list(map(str, input("Enter the edges : ").split()))
+n=len(edges)
+cost=list()
+print("\nEnter the cost matrix :")
+for _ in range(n):
+    arr=list(map(str, input().split()))
+    for i in range(n):
+        if arr[i]=="None":
+            arr[i]=None
+        else:
+            arr[i]=int(arr[i])
+    cost.append(arr)
 start=1
-n=5
 parent=[]
 distances=[]
 for _ in range(n):
@@ -14,7 +24,7 @@ def ShortestDistance(n,cost,visited,unvisited,distances,parent):
     edge=[]
     for i in range(n):
         if i+1 not in visited and cost[node-1][i]!=None:
-            parent[i]=node
+            parent[i]=edges[node-1]
             if cost[node-1][i]+distances[node-1]<distances[i]:
                 if cost[node-1][i]+distances[node-1]<minimum:
                     edge=[node,i+1]
@@ -42,5 +52,21 @@ def ShortestPath(n,source,cost,distances,parent):
         ShortestDistance(n,cost,visited,unvisited,distances,parent)
 
 ShortestPath(n,start,cost,distances,parent)
-print(distances)
-print(parent)
+print("\nDistances : ")
+for i in range(n):
+    print(f"Distance to node {edges[i]} is {distances[i]}")
+
+print("\nPath : ")
+for i in range(n):
+    if parent[i]!=None:
+        print(f"Path to node {edges[i]} is : ",end="")
+        path=list()
+        path.append(edges[i])
+        path.append(" → ")
+        curr=parent[i]
+        while curr!=None:
+            path.append(curr)
+            path.append(" → ")
+            curr=parent[edges.index(curr)]
+        del path[-1]
+        print(*path[::-1])
