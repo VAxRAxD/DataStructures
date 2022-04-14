@@ -1,5 +1,14 @@
-cost=[[None,28,None,None,None,10,None],[None,None,16,None,None,None,14],[None,None,None,12,None,None,None],[None,None,None,None,None,None,18],[None,None,None,22,None,None,None],[None,None,None,None,25,None,None],[None,None,None,None,24,None,None]]
-n=7
+n=int(input("Enter the no. of edges: "))
+cost=list()
+print("\nEnter the cost matrix :")
+for _ in range(n):
+    arr=list(map(str, input().split()))
+    for i in range(n):
+        if arr[i]=="None":
+            arr[i]=None
+        else:
+            arr[i]=int(arr[i])
+    cost.append(arr)
 def cycle(nodes,vertices):
     a,b,c=map(int,vertices)
     if nodes[a-1]==nodes[b-1]:
@@ -18,15 +27,16 @@ def distances(n,cost):
 
 def minSpanningTree(n,cost):
     mst=[]
-    nodes=[1,2,3,4,5,6,7]
+    nodes=[i for i in range(n)]
     edges=distances(n,cost)
     for edge in edges:
         if not cycle(nodes,edge):
             mst.append(edge)
     cost=0
+    print("\nThe edges in minimum spanning tree are :")
     for edge in mst:
-        print([edge[0],edge[1]],end=" ")
+        print(f"({edge[0]} {edge[1]}), Cost: {edge[2]}")
         cost+=edge[2]
-    print(f"\n{cost}")
+    print(f"\nThe cost of MST is {cost}")
 
 minSpanningTree(n,cost)

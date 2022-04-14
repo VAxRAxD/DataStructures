@@ -1,4 +1,14 @@
-cost=[[None,11,9,7,8],[11,None,15,14,13],[9,15,None,14,13],[7,14,12,None,6],[8,13,14,6,None]]
+n=int(input("Enter the no. of edges: "))
+cost=list()
+print("\nEnter the cost matrix :")
+for _ in range(n):
+    arr=list(map(str, input().split()))
+    for i in range(n):
+        if arr[i]=="None":
+            arr[i]=None
+        else:
+            arr[i]=int(arr[i])
+    cost.append(arr)
 
 def distances(n,cost,visited):
     minimum=float('inf')
@@ -11,18 +21,21 @@ def distances(n,cost,visited):
     visited.append(edge[1])
     return minimum,edge
 
-def minSpanningTree():
+def minSpanningTree(n):
     visited=[]
-    unvisited=[1,2,3,4,5]
+    unvisited=[i+1 for i in range(n)]
+    print(unvisited)
     mincost=0
     edges=[]
     visited.append(unvisited[0])
     unvisited.remove(1)
     while len(unvisited) !=0:
-        minimum,edge=distances(5,cost,visited)
+        minimum,edge=distances(n,cost,visited)
         unvisited.remove(edge[1])
         mincost+=minimum
-        edges.append(edge)
-    print(mincost)
-    print(edges)
-minSpanningTree()
+        edges.append(edge+[mincost])
+    print("\nThe edges in minimum spanning tree are :")
+    for edge in edges:
+        print(f"({edge[0]} {edge[1]}), Cost: {edge[2]}")
+    print("\nThe cost if MST is ",mincost)
+minSpanningTree(n)

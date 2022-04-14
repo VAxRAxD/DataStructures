@@ -21,6 +21,7 @@ for i in range(1,n+1):
         else:
             matrix[i][j]=matrix[i-1][j]
 
+print("\nThe matrix is : ")
 for row in matrix:
     print(*row)
 
@@ -33,8 +34,10 @@ while rem>0:
         rem-=weights[item-1]
     item-=1
 
+print("\nThe solution is { ",end="")
 for i in range(1,n+1):
     if i in arr:
         print("1",end=" ")
     else:
         print("0",end=" ")
+print("}")
