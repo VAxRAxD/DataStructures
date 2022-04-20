@@ -1,3 +1,22 @@
+"""
+ALGORITHM_GREEDY_KNAPSACK
+#n is total number of objects
+#p[1:n] and w[1:n] contains profits and weights of objects from 1 to n respectively
+#m is the kanpsack size
+#a[1:n] contains indexes of objects from 1 to n ordered such that p[a[i]]/w[a[i]] >= p[a[i+1]]/w[a[i+1]]
+#x[1:n] is solution vector
+
+for i=1 to n do x[1]=0.0
+U=m
+for i=1 to n do
+    if w[a[i]]>U then break
+    x[a[i]]=1
+    U=U-w[a[i]]
+if i<=n and U!=0 then x[a[i]]=U/w[a[i]]
+return x
+
+"""
+
 n=int(input("Enter the number of items : "))
 values=list(map(int,input("Enter the values of the items: ").split()))
 weights=list(map(int,input("Enter the weight of the items: ").split()))

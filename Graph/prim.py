@@ -1,3 +1,22 @@
+"""
+ALGORITHM_PRIM
+#cost is cost matrix where cost[i,j] denotes the cost of edge (i,j)
+
+e= {} #Initialize empty set for storing all visited edges
+s= Φ
+q=(1,n)
+s=s U {1}
+q=q \ {1}
+while q!=Φ do
+    for each vertex v ∈ cost[e] do
+        e=e U {(e,v)}
+    u=EXTRACT_MIN(e) #Get edge with the minimum cost
+    x= x U {u}
+    e=e \ {u}
+    s=s U {u.v}
+    q=q \ {u.v}
+
+"""
 n=int(input("Enter the no. of edges: "))
 cost=list()
 print("\nEnter the cost matrix :")

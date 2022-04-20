@@ -1,3 +1,28 @@
+"""
+ALGORITHM_DIJKSTRA
+#n is total number of nodes
+#d[1:n] is distance array where d[i] contains shortest distance from source to iᵗʰ vertex
+#π[1:n] is source array where π[i]  contains the parent of iᵗʰ vertex
+#cost is cost matrix where cost[i,j] denotes the cost of edge (i,j)
+
+#Initialize single source arrays
+for i=1 to n do
+    d[i]= ∞
+    π[i]= Null
+s= Φ    #set of visited nodes
+q=(1:n) #set of unvisited nodes
+d[0]=0
+while q!= Φ do
+    u=EXTRACT_MIN(d) #Get the node with shortest distance
+    s=s U {u}
+    q=q \ {u}
+    for each vertex v ∈ cost[u] do
+        if d[v]> v.d + d[u] then  #v.d is distance of v from u
+            d[v]=v.d + d[u]
+            π[v]=u
+
+"""
+
 edges=list(map(str, input("Enter the edges : ").split()))
 n=len(edges)
 cost=list()
