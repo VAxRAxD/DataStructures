@@ -1,3 +1,27 @@
+"""
+ALGORITHM_RABINKARP
+#text[1:n] is the input text of size n
+#pattern[1:m] is the pattern of size m
+#d is number of character in input set, we can assume any value
+#q is a prime number used for modulus operation
+
+d=10
+q=13
+p=0
+t=0
+for i=0 to m-1 do
+    p=(d*p + ord(pattern[i])) mod q
+    t=(d*t + ord(text[i])) mod q
+
+for i=1 to n-m+1 do
+    if p==t then
+        if p[1:m]==text[i:i+m] then
+            PRINT "Pattern found at shift " i
+    if i<n-m
+        t=((t- v[character to be removed])*d + v[character to be added]) mod q
+
+"""
+
 string=input("Enter the text : ")
 pattern=input("Enter the pattern : ")
 n=len(string)
