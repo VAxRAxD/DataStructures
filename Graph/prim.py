@@ -3,13 +3,15 @@ ALGORITHM_PRIM
 #cost is cost matrix where cost[i,j] denotes the cost of edge (i,j)
 
 e= {} #Initialize empty set for storing all visited edges
-s= Φ
-q=(1,n)
+x= {} #Initialize empty set for storing all edges of MST
+s= Φ  #Initialize empty set for storing all visited nodes
+q=(1,n) #Initialize set for storing all un-visited nodes
 s=s U {1}
 q=q \ {1}
 while q!=Φ do
-    for each vertex v ∈ cost[e] do
-        e=e U {(e,v)}
+    for each vertex v ∈ cost[s] do
+        if v not in s then
+            e=e U {(s,v,cost[s][v])}
     u=EXTRACT_MIN(e) #Get edge with the minimum cost
     x= x U {u}
     e=e \ {u}

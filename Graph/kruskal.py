@@ -1,3 +1,32 @@
+"""
+ALGORITHM_KRUSKAL
+#cost is cost matrix where cost[i,j] denotes the cost of edge (i,j)
+#n is the total number of nodes
+#nodes={1..n} contains all the nodes
+
+e= {} #Initialize empty set for storing all edges
+x= {} #Initialize empty set for storing all edges of MST
+for i=1 to n do
+    for each vertex v ∈ cost[i] do
+        e=e U {(i,v,,cost[s][v])}
+e.SORT #Sort the edges on basis of their edge-cost
+for each edge u ∈ e do
+    if not CYCLE(u) then
+        x= x U {u}
+        e=e \ {u}
+
+CYCLE(e)
+#e is the edges where e[i,j,cost] denotes the soure node, destination node & its cost
+
+if node[e[i]]==node[e[j]] then
+    return TRUE
+for each node i ∈ nodes do
+    if i==node[e[j]] then
+        i=node[e[i]]
+return FALSE
+
+"""
+
 n=int(input("Enter the no. of edges: "))
 cost=list()
 print("\nEnter the cost matrix :")
